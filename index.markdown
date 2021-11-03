@@ -6,4 +6,6 @@ layout: home
 nav_order: 1
 ---
 
-# Welcome
+# What is AIDDL?
+
+AIDDL (short for *Artificial Intelligence Domain Definition Language*) is a language and framework for Integrative AI.
