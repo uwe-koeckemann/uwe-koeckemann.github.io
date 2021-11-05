@@ -1,6 +1,7 @@
 ---
 layout: default
-title: Terms
+title: Defining Functions
 parent: The Language
-nav_order: 1
+nav_order: 3
 ---
+

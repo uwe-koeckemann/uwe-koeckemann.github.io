@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Common Types and Algorithms
-nav_order: 5
+title: Common Library
+nav_order: 6
 has_children: true
 ---
 

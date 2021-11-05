@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Java
+title: Scala
 parent: Installing AIDDL
-grand_parent: Getting Started
 nav_order: 3
+grand_parent: Getting Started
 ---
