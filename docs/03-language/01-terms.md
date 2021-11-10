@@ -5,11 +5,10 @@ parent: The Language
 nav_order: 1
 ---
 
-Everything written in AIDDL proper is a *Term*. Basic terms can be combined into
-complex types as explained later.
+Everything written in AIDDL proper is a *Term*. 
 
-The following table provides an overview of all basic types with a short
-description and example.
+The following table provides an overview of all basic types of terms with a
+short description and example.
 
 | Name               | Reference                           | Description                                                            | Examples                                        |
 |--------------------|-------------------------------------|------------------------------------------------------------------------|-------------------------------------------------|
@@ -33,7 +32,36 @@ description and example.
 |                    |                                     |                                                                        | `^f@m` references function `f` in module `m`    |
 | Key Value Pair     | `org.aiddl.term.key-value`          | A key and a value term. The key must not be a Key-value pair itself.   | `x:10` symbolic key `x` with integer value `10` |
 
+# Grammar
 
+Every AIDDL file represents a module and consists of a module specification and
+an arbitrary number of entries. Each entry consists of a type, a name and a
+value (all terms).
+
+    <AiddlFile>         :: <Module> (<Entry>)*
+    <Module>            :: "(#mod" <Symbolic> <Symbolic> ")"
+    <Entry>             :: "("<Term> <Term> <Term>")"
+    <Term>              :: <Numerical> | <Collection> | <Tuple> | <Symbolic> | <String>
+                         | <Variable>  | <Reference> | <KeyValue>
+    <Numerical>         :: <Integer> | <Rational> | <Real> | <Infinity> | <NaN>
+    <Collection>        :: <List> | <Set>
+    <List>              ::  "[" <Term>* "]"
+    <Set>               ::  "{" <Term>* "}"
+    <Tuple>             ::  "(" <Term>* ")"
+    <EntryReference>    :: [<Symbolic>|<Tuple>]"@"<Symbolic> | "$"<Term>
+    <Reference>         :: <Reference> | <FunctionReference>
+    <FunctionReference> :: "^"[<Symbolic>|"$"<Symbolic>|<Symbolic>"@"<Symbolic>]
+    <KeyValue>          :: [<Symbolic>|<String>|<Variable>|<Numerical>|<Collection>|<Tuple>|<Reference>]":"<Term>
+    <Symbolic>          :: (("a"-"z"|"A"-"Z"|"#")("a"-"z"|"A"-"Z"|"0"-"9"|"_"|"."|"-"|"'")*)
+                         |"+"|"-"|"/"|"*"|"&"|"|"|"!"|"="|"<"|">"|"=>"|"<=>"|"^"|"!="|"<="|">="
+    <String>            :: "\"" [~\"]* "\""                     
+    <Variable>          :: <NamedVariable> | "_"
+    <NamedVariable>     :: ?(("a"-"z"|"A"-"Z")("a"-"z"|"A"-"Z"|"0"-"9"|"_"|"."|"-"|"'")*)
+    <Integer>           :: ["-"]("0"|"1"-"9")("0"-"9"]*
+    <Rational>          :: ["-"]("0"|"1"-"9")("0"-"9")* "/" ("1"-"9"("0"-"9")*)
+    <Real>              :: ["-"] ("0"|"1"-"9")("0"-"9")* "." ("0"-"9")+
+    <Infinity>          :: ["+"|"-"]"INF"
+    <NaN>               :: "NaN"
 
 # Reference Terms
 
