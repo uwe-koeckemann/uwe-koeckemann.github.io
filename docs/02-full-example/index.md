@@ -32,7 +32,8 @@ board and constraints make sure they are not placed on the same row, column or
 diagonal. This can be slightly simplified, if we use one variable for each
 column of the board with one possible value for each row.
 
-With these ideas in mind, let's create an AIDDL representation for 4-queens.
+With these ideas in mind, let's create an AIDDL representation for a 4-queens
+problem.
 
 ## AIDDL Module Header
 
