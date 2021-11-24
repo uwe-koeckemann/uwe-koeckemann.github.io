@@ -1,6 +1,6 @@
 ---
 layout: default
-title: A Full Example: Placing 4 Queens
+title: A Full Example - Placing 4 Queens
 nav_order: 2
 has_children: true
 ---
