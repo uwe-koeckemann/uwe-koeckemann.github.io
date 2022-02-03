@@ -2,7 +2,7 @@
 layout: default
 title: Writing Types
 parent: The Language
-nav_order: 2
+nav_order: 6
 ---
 
 The terms that make up the language part of AIDDL have no link to any concrete
@@ -27,7 +27,12 @@ new type called `org.aiddl.my-module.new-type` which is an AIDDL set.
     (#type new-type ^org.aiddl.type.term.collection.set)
 
 This example can be seen as simply renaming the AIDDL set type.  The `^` signals
-that the following is a function reference.
+that the following is a function reference. This would allow us to write an entry
+
+    (^$new-type S {a b c})
+    
+using a function reference to the name of the type in the type slot of the
+entry.
 
 Any basic AIDDL type can be used in a type definition, but in most cases we
 would like to be more precise. For this, we can employ a combination of type
