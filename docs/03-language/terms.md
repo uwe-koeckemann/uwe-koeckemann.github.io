@@ -38,30 +38,47 @@ Every AIDDL file represents a module and consists of a module specification and
 an arbitrary number of entries. Each entry consists of a type, a name and a
 value (all terms).
 
-    <AiddlFile>         :: <Module> (<Entry>)*
-    <Module>            :: "(#mod" <Symbolic> <Symbolic> ")"
-    <Entry>             :: "("<Term> <Term> <Term>")"
-    <Term>              :: <Numerical> | <Collection> | <Tuple> | <Symbolic> | <String>
-                         | <Variable>  | <Reference> | <KeyValue>
-    <Numerical>         :: <Integer> | <Rational> | <Real> | <Infinity> | <NaN>
-    <Collection>        :: <List> | <Set>
-    <List>              ::  "[" <Term>* "]"
-    <Set>               ::  "{" <Term>* "}"
-    <Tuple>             ::  "(" <Term>* ")"
-    <EntryReference>    :: [<Symbolic>|<Tuple>]"@"<Symbolic> | "$"<Term>
-    <Reference>         :: <Reference> | <FunctionReference>
-    <FunctionReference> :: "^"[<Symbolic>|"$"<Symbolic>|<Symbolic>"@"<Symbolic>]
-    <KeyValue>          :: [<Symbolic>|<String>|<Variable>|<Numerical>|<Collection>|<Tuple>|<Reference>]":"<Term>
-    <Symbolic>          :: (("a"-"z"|"A"-"Z"|"#")("a"-"z"|"A"-"Z"|"0"-"9"|"_"|"."|"-"|"'")*)
-                         |"+"|"-"|"/"|"*"|"&"|"|"|"!"|"="|"<"|">"|"=>"|"<=>"|"^"|"!="|"<="|">="
-    <String>            :: "\"" [~\"]* "\""                     
-    <Variable>          :: <NamedVariable> | "_"
-    <NamedVariable>     :: ?(("a"-"z"|"A"-"Z")("a"-"z"|"A"-"Z"|"0"-"9"|"_"|"."|"-"|"'")*)
-    <Integer>           :: ["-"]("0"|"1"-"9")("0"-"9"]*
-    <Rational>          :: ["-"]("0"|"1"-"9")("0"-"9")* "/" ("1"-"9"("0"-"9")*)
-    <Real>              :: ["-"] ("0"|"1"-"9")("0"-"9")* "." ("0"-"9")+
-    <Infinity>          :: ["+"|"-"]"INF"
-    <NaN>               :: "NaN"
+    <AiddlFile>  :: <Module> (<Entry>)*
+    <Module>     :: "(#mod" <Symbolic>
+                            <Symbolic> ")"
+    <Entry>      :: "("<Term> <Term> <Term>")"
+    <Term>       ::  <Basic> | <Composite>
+                  |  <Reference>
+    <Basic>      :: <Symbol> | <Numerical>
+                  | <Variable> | <String>
+    <Numerical>  :: <Integer> | <Rational>
+                  | <Real> | <Infinity> | <NaN>
+    <Symbolic>   :: (("a"-"z"|"A"-"Z"|"#")
+                     ("a"-"z"|"A"-"Z"|"0"-"9"
+                     |"_"|"."|"-"|"'")*)
+                     |"+"|"-"|"/"|"*"|"&"|"|"
+                     |"!"|"="|"<"|">"|"=>"
+                     |"<=>"|"^"|"!="|"<="|">="
+    <String>        :: "\"" [~\"]* "\""
+    <Variable>      :: <NamedVar> | "_"
+    <NamedVar> :: ?(("a"-"z"|"A"-"Z")
+                    ("a"-"z"|"A"-"Z"
+                    |"0"-"9"|"_"|"."|"-"|"'")*)
+    <Integer> :: ["-"]("0"|"1"-"9")("0"-"9"]*
+    <Rational> :: ["-"]("0"|"1"-"9")("0"-"9")*
+                   "/" ("1"-"9"("0"-"9")*)
+    <Real> :: ["-"] ("0"|"1"-"9")("0"-"9")*
+               "." ("0"-"9")+
+    <Infinity> :: ["+"|"-"]"INF"
+    <NaN> :: "NaN"
+    <Composite> :: <List> | <Set>
+                 | <Tuple> | <KeyValue>
+    <List>       ::  "[" <Term>* "]"
+    <Set>        ::  "{" <Term>* "}"
+    <Tuple>      ::  "(" <Term>* ")"
+    <KeyValue>   :: [<Symbolic>|<String>|<Variable>
+                    |<Numerical>|<Collection>|<Tuple>
+                    |<Reference>]":"<Term>
+    <Reference> :: <EntRef> | <FunRef>
+    <EntRef>  :: [<Symbolic>|<Tuple>]"@"<Symbolic>
+               | "$"<Term>
+    <FunRef> :: "^"[<Symbolic>|"$"<Symbolic>
+                   |<Symbolic>"@"<Symbolic>]
 
 # Reference Terms
 
