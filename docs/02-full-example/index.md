@@ -178,19 +178,20 @@ the function in a tuple:
 ### Putting it all Together
  
 After creating constraints for each variable pair, we can finally put all these
-parts together to assemble a CSP.
+parts together to assemble a CSP as a tuple of three key-value pairs for
+variables, domains, and constraints. Keys and values are separated by a `:`.
 
     (Problem@C
       csp
       (
-        {?X1 ?X2 ?X3 ?X4}
-        {
+        variables:{?X1 ?X2 ?X3 ?X4}
+        domains:{
           ?X1:$D
           ?X2:$D
           ?X3:$D
           ?X4:$D
         }
-        {
+        constraints:{
           ((?X1 ?X2) ^$f-con-1-2)
           ((?X1 ?X3) ^$f-con-1-3)
           ((?X1 ?X4) ^$f-con-1-4)
@@ -221,14 +222,14 @@ follows:
     (Problem@C
       csp
       (
-        {?X1 ?X2 ?X3 ?X4}
-        {
+        variables:{?X1 ?X2 ?X3 ?X4}
+        domains:{
           ?X1:$D
           ?X2:$D
           ?X3:$D
           ?X4:$D
         }
-        {
+        constraints:{
           ((?X1 ?X2) ($diagonal ?X1 ?X2 1))
           ((?X1 ?X3) ($diagonal ?X1 ?X3 2))
           ((?X1 ?X4) ($diagonal ?X1 ?X4 3))
@@ -243,6 +244,206 @@ all calls to `$diagonal` will be replaced by references to Boolean functions
 that will evaluate our constraints.
 
 ## Solving the CSP with AIDDL Common
+
+First, we create an empty container and parse the file containing our problem
+into it. We remember the name of the parsed module, so we can access its entries
+later.
+
+    val db = new Container
+    val modCsp = Parser.parseInto("../aiddl/n-queens.aiddl", db)
+    
+Then, we access the entry named `csp` from the loaded module and ask for its
+processed value. Any functions or references in our CSP will be evaluated in the
+process. This means that in the resulting value, all six calls to diagonal will
+be replaced with references to to functions that can then be used as
+constraints.
+    
+    val csp = db.getProcessedValueOrPanic(modCsp, Sym("csp"))
+    
+Finally, we create the CSP solver and use it to find a solution. 
+
+    val cspSolver = new CspSolver
+    cspSolver.init(csp)
+    val a = cspSolver.search
+ 
+The content of `a` after is an `Option` that should contain an assignment of all
+variables that does not violate any constraint:
+
+    Some(List(?X1:2, ?X2:4, ?X3:1, ?X4:3))
+    
+The solver keeps its state. So running `search` again will backtrack from the
+previous solution. When there are no more solutions, it will return `None`.
+If we run the following two lines after the first search above
+
+    println(cspSolver.search)
+    println(cspSolver.search)
+    
+we get the following output:
+    
+    Some(List(?X1:3, ?X2:1, ?X3:4, ?X4:2))
+    None
+    
+    
+## Planning to Place n-queens
+
+The second step is to define our planning problem.  For this we need to define
+an initial state (a board with some queens in random places and the state of the
+gripper), some idea of what the system can do (pick and place queens with the
+gripper), and a goal (a target configuration of queens).
+
+State and goals are expressed as sets of state-variable assignments (represented
+with key-value pairs). The board is represented with a state-variable `(board ?i
+?j)` for each space on the board. These variables have two possible values
+`free` and `queen`.  The only other state-variable is `gripper-free` which can
+take the values `true` or `false`.
+
+With this, we can write our initial state for four queens as:
+
+    (State@SVP S0
+      {
+        (board 1 1) : queen
+        (board 1 2) : queen
+        (board 1 3) : queen
+        (board 1 4) : queen
+        (board 2 1) : free
+        (board 2 2) : free
+        (board 2 3) : free
+        (board 2 4) : free
+        (board 3 1) : free
+        (board 3 2) : free
+        (board 3 3) : free
+        (board 3 4) : free
+        (board 4 1) : free
+        (board 4 2) : free
+        (board 4 3) : free
+        (board 4 4) : free
+        
+        gripper-free : true
+      })
+
+Operators allow us to model what a system can do to change a state. In the
+simple case, they come with a name, a set of preconditions, and a set of
+effects. Preconditions tell us in which state an operator can be used, while
+effects tell us how the state changes. Both take the same format as a state
+itself: a set of state-variable assignments.
+To avoid having to write two operators for each row and column of the board, we use variables that usually also appear in the name of the operator.
+
+The operator `pick` can be used on any field `?r` `?c` that contains a queen if
+the gripper is free. Its effect is that the field becomes free and the gripper
+is no longer free.
+
+    (Operator@SVP pick
+      (
+        name:(pick ?r ?c)
+        preconditions:{
+          (board ?r ?c) : queen
+          gripper-free : true
+        }
+        effects:{
+          (board ?r ?c) : free
+          gripper-free : false 
+        }
+      )
+    )
+
+The operator `place` can be used on any field `?r` `?c` that is free if the
+gripper is not free. Its effect is that the space contains a queen and the
+gripper is freed.
+
+    (Operator@SVP place
+      (
+        name:(place ?r ?c)
+        preconditions:{
+          (board ?r ?c) : free
+          gripper-free : false
+        }
+        effects:{
+          (board ?r ?c) : queen
+          gripper-free : true
+        }
+      )
+    )
+
+Finally, the goal can be any board configuration. So if we take the output from above, we have the following goal:
+
+    (Goal@SVP G
+      {
+        (board 3 1) : queen
+        (board 1 2) : queen
+        (board 4 3) : queen
+        (board 2 4) : queen
+      }
+    )
+    
+## Solving the Planning Problem
+
+This step is very similar to solving the CSP.
+
+    val modPlan = Parser.parseInto("../aiddl/planning.aiddl", db)
+    val planningProblem = db.getProcessedValueOrPanic(modPlan, Sym("problem"))
+  
+    val forwardPlanner = new ForwardSearchPlanIterator
+    forwardPlanner.init(planningProblemSubstituted)
+  
+    val answer = forwardPlanner.search
+    
+    answer match {
+      case Some(plan) => plan.foreach(println)
+      case None => println("No plan found.")
+    }
+
+This should produce the following output:
+
+    (pick 1 1)
+    (place 4 4)
+    (pick 1 3)
+    (place 4 2)
+    (pick 1 2)
+    (place 1 3)
+    (pick 1 4)
+    (place 3 4)
+    (pick 4 4)
+    (place 2 1)
+    
+    
+## Integrating Constraint Processing and Planning
+    
+Now that we have both ends of the problem in the same language, 
+actually integrating them becomes fairly straight forward.
+If we change our goal to
+
+    (Goal@SVP G
+      {
+        (board ?X1 1) : queen
+        (board ?X2 2) : queen
+        (board ?X3 3) : queen
+        (board ?X4 4) : queen
+      }
+    )
+    
+we can substitute the assignments provided by the CSP solver to decide where the
+queens should be placed. For this, we can create a `Substitution` object from
+our assignment (here, the `get` unpacks the `Option` and would crash the program
+if no solution exists):
+
+    val substitution = Substitution.from(ListTerm(a.get))
+    
+Finally, we apply the substitution to our planning problem.
+
+    val planningProblemSubstituted = planningProblem \ substitution
+
+This connects both ends and leads to the same planning problem we solved
+previously, only that the solution is provided by the CSP solver.
+
+## Discussion
+
+While the example we use here is a toy example it can easily transfered to more
+useful cases. Consider, for instance, a truck that needs to be loaded with
+objects of certain shapes. In this case the CSP allows us to decide where
+objects should go, while a planner can be used to decide how the objects are
+placed in their chosen spots. For this purpose it may be possible to further
+extend the scenario to allow reasoning about the motion of our robotic arms, or
+the order in which items should arrive on a conveyor belt.
 
 
 # References 
