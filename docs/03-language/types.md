@@ -107,12 +107,12 @@ at the fourth field.
 
     (#type t_sig (type.sig [^numerical ^symbolic ^numerical] min:5 max:+INF repeat:2))
 
-*Maps* allow to specify types for tuples or collections that contain types
+*Dictionaries* allow to specify types for tuples or collections that contain types
 behind certain keys.  The following type includes all tuples or collections that
 have a key `from` and a key `to` pointing to a symbol and a key `weight`
 pointing to a numerical:
 
-    (#type t_edge (type.map [from:^symbolic to:^symbolic weight:^symbolic]))
+    (#type t_edge (type.dict [from:^symbolic to:^symbolic weight:^symbolic]))
 
 
 *Matrix* types can be used to define lists/tuples of lists/tuples. We can define
