@@ -5,16 +5,21 @@ parent: The Language
 nav_order: 4
 ---
 
-Namespaces allow to avoid extensive usage of references. A namespace is of type
-`#nms` and its value is a (reference to a) collection of key-value pairs.
-Applying a name space to a module will substitute every occurrence of a key with
-its value for each entry in the collection.
+Namespaces allow to substitute symbolic names when a module is loaded.  This
+allows to introduce shortcuts for overly long names (such as the default
+function names in AIDDL).
 
-The following example will replace every occurance of the symbolic term `+` with
-the symbolic term `org.aiddl.eval.numerical.add`.
+A namespace is introduced with an entry of type `#nms`.  The value of this entry
+is a (reference to a) collection of key-value pairs.  Applying a namespace to a
+module will substitute every occurrence of a key with its value *when the module
+is loaded*.
+
+The following example creates a simple namespace that will replace every
+occurance of the symbolic term `+` with the symbolic term
+`org.aiddl.eval.numerical.add`.
 
     (#nms A {+:org.aiddl.eval.numerical.add})
-
+    
 Applying this namespace to the following term
 
     (+ 1 2)
@@ -22,9 +27,22 @@ Applying this namespace to the following term
 will replace it with
 
     (org.aiddl.eval.numerical.add 1 2)
+    
+To extend this namespace, simply add more key-value pairs:
 
-Various standard namespaces are defined in `org.aiddl.eval-nms` and listed
-below.  *Note: Using a namespace may have unwanted side-effects since it
+    (#nms A {
+              +:org.aiddl.eval.numerical.add
+              -:org.aiddl.eval.numerical.sub
+            })
+    
+
+Various standard namespaces are defined in `org.aiddl.eval-nms` (see [here](https://github.com/uwe-koeckemann/AIDDL/blob/master/core/aiddl/eval-nms.aiddl)) and listed
+below. These can be loaded by loading the module and the namespace.
+
+    (#req nms org.aiddl.eval-nms)
+    (#nms nms-basic basic-ops@nms)
+
+*Note: Using a namespace may have unwanted side-effects since it
 overwrites any of the symbolic keys in its collection. Therefore it is
 recommended to use small namespaces where possible.*
     

@@ -2,14 +2,15 @@
 layout: default
 title: Entries
 parent: The Language
-nav_order: 3
+nav_order: 1
 ---
 
-Every AIDDL file is composed of entries contain a type, a name and a value
-written as a tuple of three elements.  In the previous secion we saw the special
-entry that delcares the module of the file. The module entry is followed by any
-number of regular entries that may define types or functions (see following
-sections), or contain data/models. The following entry
+Every AIDDL file is a list of entries.  Each entry contains a type, a name and a
+value written as a tuple of three elements (hence each entry is itself also a
+term).  In the previous secion we saw the special entry that delcares the module
+of the file. The module entry is followed by any number of regular entries that
+may define types or functions (see following sections), or contain
+data/models. The following entry
 
 
     (^org.aiddl.type.collection.set S {a b c})

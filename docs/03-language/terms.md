@@ -2,10 +2,10 @@
 layout: default
 title: Terms
 parent: The Language
-nav_order: 1
+nav_order: 3
 ---
 
-Everything written in AIDDL proper is a *Term*. 
+Everything written in AIDDL proper (i.e. the language) is a *Term*.
 
 The following table provides an overview of all basic types of terms with a
 short description and example.
@@ -89,37 +89,62 @@ references.
 
 *Entry reference terms* point to entries in the same or in other modules.  This
 is useful when the referenced entry may change or when trying to break down
-large models into smaller pieces that can then be assembled.  References to the
-same module can be written as
-
-    $name
-
-where `name` is the name of an entry in the current module.  In general,
+large models into smaller pieces that can then be assembled.  In general,
 references can be written as
 
     name@alias
-
+    
 where `name` is again an entry name and `alias` is the local name of the module
-in which the entry can be found. The *self alias* of a module is established as
-the name field of the `#mod` entry of a module. Other aliases are established
-through `#req` entries that load other modules as requirements.
+in which the entry can be found.  References to the same module can be written
+more compactly as
+
+    $name
+
+where `name` is the name of an entry in the current module. 
+This is equivalent to writing 
+
+    name@self
+
+if `self` is the self alias of the current module established by the `#mod`
+entry of a module:
+
+    (#mod self uri)
+
+Other aliases are established through `#req` entries that load other modules as
+requirements. For example, after loading the module `req-uri` with
+
+    (#req mod req-uri)
+    
+we can refer to an entry named `name` with
+    
+    name@mod
+
+## Resolving References
 
 In any AIDDL core there exists a function that allows to resolve any references
-in a term recursively given a container. Note that the result of this may change
-if the referenced entries change. So any term that includes reference terms may
-represent a different term depending on when it is resolved. 
+in a term recursively given a container. 
 
-Further, entry references may refer to themselves. As a result, some care is
-required when resolving references in terms.
+Note that the result of this may change if the referenced entries change. So any
+term that includes a reference term may represent a different term depending on
+when it is resolved.
+
+Further, entry references may refer to their own entry. In such cases some care
+is required when resolving references in terms. For instance
+
+    (^org.aiddl.type.collection.set S {$S})
+    
+Defines `S` as a set that contains `S`. Attempting to fully resolve this term is
+not possible because the result is an infinetly nested set.
 
 # Function Reference Terms
  
 *Function reference terms* signal that a symbol references a function.  This
 allows to pass functions as arguments (i.e. higher-order functions) and to use
 these functions as building blocks (e.g., a heuristic function can be provided
-to a search algorithm).  Function references are preceded by the
-`^` symbol and consist of a symbolic term, or a
-reference term. In the latter case, the alias will be resolved to the URI of the
+to a search algorithm).  Function references are preceded by the `^` symbol and
+consist of a symbolic term, or a reference term.
+
+In the latter case, the alias will be resolved to the URI of the
 referenced module. The following two entries, for instance, are equivalent if
 `M` is an alias for `org.aiddl.my-module`:
 
@@ -127,5 +152,7 @@ referenced module. The following two entries, for instance, are equivalent if
     ^org.aiddl.my-module.f
     ^f@M
 
-Function references assume that the referenced functions will be known when they
-are first used.
+Function references assume that their functions are registered (in the container
+or function registry) when they are first used. The actual functions may be
+implemented in any programming langage with an AIDDL core library or via `#def`
+or `#type` entries.
