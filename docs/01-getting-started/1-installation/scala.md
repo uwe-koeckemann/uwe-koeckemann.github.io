@@ -5,8 +5,9 @@ parent: Installing AIDDL
 nav_order: 3
 grand_parent: Getting Started
 ---
+The Scala version of the core depends on the java core and util, so you must first follow the instruction available on the [Java installation instructions](https://uwe-koeckemann.github.io/docs/01-getting-started/1-installation/java.html) for "Core" and "Util". 
 
-First, install the [Scala Build Tool
+Then, install the [Scala Build Tool
 (SBT)](https://www.scala-sbt.org/download.html).
 
 We use `<AIDDL>` as the root of the [aiddl.org](http://www.aiddl.org) git
