@@ -51,15 +51,16 @@ be its module URI concatenated with the type name. Defining a type will create a
 membership function with the type's URI. This function can be used to test if a
 term satisfies a type.
 
-The following example defines a
-new type called `org.aiddl.my-module.new-type` which is an AIDDL set.
+The following example defines a new type called `org.aiddl.my-module.new-type`
+which is an AIDDL set.
 
     (#mod self org.aiddl.my-module)
     
     (#type new-type ^org.aiddl.type.term.collection.set)
 
 This example can be seen as simply renaming the AIDDL set type.  The `^` signals
-that the following is a function reference. This would allow us to write an entry
+that the following is a function reference. This would allow us to write an
+entry
 
     (^$new-type S {a b c})
     
