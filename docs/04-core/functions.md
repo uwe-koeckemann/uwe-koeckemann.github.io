@@ -45,20 +45,20 @@ simplicity.
 | lambda           | `a`                               | Create reference to anonymous function defined by `a`                      |
 | quote            | `x`                               | `x`                                                                        |
 | type             | `x`, `t`                          | Check if `x` has type `t`                                                  |
-| signature        | `X=(x_1 \ldots) , S=[s_1 \ldots]` | `\mathit{true}` iff all `x_i` have type `s_{\min{i,\vert S\vert }}`        |
+| signature        | `X=(x_1 ...) , S=[s_1 ...]` | `true` iff all `x_i` have type `s_{min{i,| S| }}`        |
 | equals           | `a`, `b`                          | `a = b`                                                                    |
-| not-equals       | `a`, `b`                          | `a \neq b`                                                                 |
-| matches          | `a`, `b`                          | `\exists_σ : aσ = b`                                             |
+| not-equals       | `a`, `b`                          | `a ≠ b`                                                                 |
+| matches          | `a`, `b`                          | `∃_σ : aσ = b`                                             |
 | first            | `L`                               | first element of `L` (`L` may be a tuple)                                  |
 | last             | `L`                               | last element of `L` (`L` may be a tuple)                                   |
-| size             | `C`                               | `\vert C\vert `                                                            |
-| get-key          | `C,k`                             | `v` s.t. `k:v \in C` (`C` may be a tuple)                                  |
+| size             | `C`                               | `| C| `                                                            |
+| get-key          | `C,k`                             | `v` s.t. `k:v ∈ C` (`C` may be a tuple)                                  |
 | get-idx          | `L,n`                             | `n`th element of `L` (`L` may be a tuple)                                  |
 | let              | `σ,a`                        | `a σ`                                                                 |
 | if               | `c,a,b`                           | if `c` then `a` else `b`                                                   |
-| cond             | `L`                               | `e_i` s.t. `\min_i : (c_i:e_i) \in L \wedge c_i`                           |
-| map              | `f,m,C`                           | `\{ fσ \vert  e \in C, mσ=e \}`                                  |
-| filter           | `f,m,C`                           | `\{ e \vert  e \in C, mσ=e,fσ = true \}`                         |
+| cond             | `L`                               | `e_i` s.t. `min_i : (c_i:e_i) ∈ L ∧ c_i`                           |
+| map              | `f,m,C`                           | `{ fσ |  e ∈ C, mσ=e }`                                  |
+| filter           | `f,m,C`                           | `{ e |  e ∈ C, mσ=e,fσ = true }`                         |
 | reduce           | `f,m,C`                           |                                                                            |
 | match            | `f,m,C`                           |                                                                            |
 | zip              | `f,m,C`                           |                                                                            |
@@ -68,27 +68,27 @@ simplicity.
 | .logic           |                                   |                                                                            |
 |------------------|-----------------------------------|----------------------------------------------------------------------------|
 | not              | `x`                               | true if `x` is false                                                       |
-| and              | `x_1 \ldots x_n`                  | true if all `x_i` are true                                                 |
-| or               | `x_1 \ldots x_n`                  | true if any `x_i` is true                                                  |
-| forall           | `m, C, x`                         | `\forall_{e \in C} \exists_σ : e_i = m σ \wedge x σ = true` |
-| exists           | `m, C, x`                         | `\exists_{e \in C} \exists_σ : e_i = m σ \wedge x σ = true` |
+| and              | `x_1 ... x_n`                  | true if all `x_i` are true                                                 |
+| or               | `x_1 ... x_n`                  | true if any `x_i` is true                                                  |
+| forall           | `m, C, x`                         | `∀_{e ∈ C} ∃_σ : e_i = m σ ∧ x σ = true` |
+| exists           | `m, C, x`                         | `∃_{e ∈ C} ∃_σ : e_i = m σ ∧ x σ = true` |
 |------------------|-----------------------------------|----------------------------------------------------------------------------|
 | .collection      |                                   |                                                                            |
 |------------------|-----------------------------------|----------------------------------------------------------------------------|
-| in               | `e, C`                            | `e \in C`                                                                  |
-| contains         | `C, e`                            | `e \in C`                                                                  |
-| contains-all     | `C_1, C_2`                        | `C_2 \subseteq C_1`                                                        |
-| contains-any     | `C_1, C_2`                        | `C_1 \cap C_2 \neq \varnothing`                                            |
-| contains-match   | `C, m`                            | `\exists_{e \in C, σ} : mσ = e`                                  |
-| add-element      | `e, C`                            | `C' ~ \text{s.t.} ~ e \in C'`                                              |
-| add-all          | `C_1, C_2`                        | `C' = C_1 \cup C_2`                                                        |
-| remove           | `e, C`                            | `C-\{e\}`                                                                  |
+| in               | `e, C`                            | `e ∈ C`                                                                  |
+| contains         | `C, e`                            | `e ∈ C`                                                                  |
+| contains-all     | `C_1, C_2`                        | `C_2 ⊆ C_1`                                                        |
+| contains-any     | `C_1, C_2`                        | `C_1 ∩ C_2 ≠ ∅`                                            |
+| contains-match   | `C, m`                            | `∃_{e ∈ C, σ} : mσ = e`                                  |
+| add-element      | `e, C`                            | `C' ~ \text{s.t.} ~ e ∈ C'`                                              |
+| add-all          | `C_1, C_2`                        | `C' = C_1 ∪ C_2`                                                        |
+| remove           | `e, C`                            | `C-{e}`                                                                  |
 | remove-all       | `C_1, C_2`                        | `C_2-C_1`                                                                  |
-| sum              | `C`                               | `\sum_{e \in C} e`                                                         |
+| sum              | `C`                               | `∑_{e ∈ C} e`                                                         |
 |------------------|-----------------------------------|----------------------------------------------------------------------------|
 | .collection.list |                                   |                                                                            |
 |------------------|-----------------------------------|----------------------------------------------------------------------------|
-| concat           | `L_1, L_2`                        | `L' = L_1 \dot L_2`                                                        |
+| concat           | `L_1, L_2`                        | `L' = L_1 ∙ L_2`                                                        |
 | % head           | `L`                               | first element of `L`                                                       |
 | % tail           | `L`                               | last element of `L`                                                        |
 | % cut-head       | `L`                               | `L` without first element                                                  |
@@ -96,7 +96,7 @@ simplicity.
 |------------------|-----------------------------------|----------------------------------------------------------------------------|
 | .collection.set  |                                   |                                                                            |
 |------------------|-----------------------------------|----------------------------------------------------------------------------|
-| union            | `\{S_1, \ldots, S_n \}`           | `S' = \bigcup_i S_i`                                                       |
+| union            | `{S_1, ..., S_n }`           | `S' = ⋃_i S_i`                                                       |
 |------------------|-----------------------------------|----------------------------------------------------------------------------|
 | .numerical       |                                   |                                                                            |
 |------------------|-----------------------------------|----------------------------------------------------------------------------|
@@ -104,13 +104,13 @@ simplicity.
 | sub              | `a,b`                             | `a-b`                                                                      |
 | mult             | `a,b`                             | `ab`                                                                       |
 | div              | `a,b`                             | `a/b`                                                                      |
-| modulo           | `a,b`                             | `a \mod b`                                                                 |
+| modulo           | `a,b`                             | `a modulo b`                                                                 |
 | greater-than     | `a,b`                             | `a > b`                                                                    |
-| greater-than-eq  | `a,b`                             | `a \geq b`                                                                 |
+| greater-than-eq  | `a,b`                             | `a ≥ b`                                                                 |
 | less-than        | `a,b`                             | `a < b`                                                                    |
-| less-than-eq     | `a,b`                             | `a \leq b`                                                                 |
+| less-than-eq     | `a,b`                             | `a ≤ `                                                                 |
 |------------------|-----------------------------------|----------------------------------------------------------------------------|
-| .term            |                                   |                                                                            |
+| .term            |                                   | Default type check functions         |
 |------------------|-----------------------------------|----------------------------------------------------------------------------|
 | term             | `a`                               | true                                                                       |
 | numerical        | `a`                               | `a` is numerical                                                           |
