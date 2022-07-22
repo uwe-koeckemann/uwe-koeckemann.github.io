@@ -5,7 +5,12 @@ parent: Recipes & Snippets
 nav_order: 1
 ---
 
-We want to parse a file called `problem-01.aiddl` from the current directory and
+Aim:
+
+- Parse an AIDDL file
+- Access and fully resolve and evaluate the value of an entry
+
+Suppose we want to parse a file called `problem-01.aiddl` from the current directory and
 get a processed version of the entry with the symbolic name `problem`. The
 processed value will be fully evaluated and all references recursivly resolved.
 If anything goes wrong and exception will be thrown.
@@ -20,7 +25,7 @@ If anything goes wrong and exception will be thrown.
 
     Container c = new Container();
 	SymbolicTerm modName = Parser.parseFile( "./problem-01.aiddl", c);
-    Term problem = c.getProcessedEntryOrPanic(modName, Term.sym("problem"));
+    Term problem = c.getProcessedValueOrPanic(modName, Term.sym("problem"));
     
 # Python
 
