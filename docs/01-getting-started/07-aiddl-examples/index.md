@@ -1,7 +1,7 @@
 ---
 layout: default
-title: What's Next?
-nav_order: 10
+title: Going Further: Examples
+nav_order: 7
 parent: Getting Started
 ---
 

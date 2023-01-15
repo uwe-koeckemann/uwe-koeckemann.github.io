@@ -1,6 +1,6 @@
 ---
 layout: default
-title: The Language
+title: Language Specification
 nav_order: 3
 has_children: true
 ---

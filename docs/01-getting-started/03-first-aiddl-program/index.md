@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Hello World
+title: Writing Programs with AIDDL
 nav_order: 3
 parent: Getting Started
 has_children: true

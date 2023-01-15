@@ -1,8 +1,9 @@
 ---
 layout: default
-title: A Full Example - Placing 4 Queens
-nav_order: 2
-has_children: true
+title: A Full Example: Planning to Place N-Queens
+nav_order: 6
+parent: Getting Started
+has_children: false
 ---
 
 In this section, we will look at a toy example of integrative AI that integrates
