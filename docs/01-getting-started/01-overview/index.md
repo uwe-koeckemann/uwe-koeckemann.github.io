@@ -8,7 +8,9 @@ has_children: true
 
 # What is AIDDL?
 
-- AIDDL is both a language and a framework for integrative AI.
+- AIDDL is both a language and a framework for integrative AI. That means its
+  main purpose is to facilitate the combination of different AI techniques into
+  a larger (integrated) system.
 - As a language, AIDDL allows to write models for different AI problems in a
   common language.
 - As a framework, AIDDL allows to manipulate terms written in the language,
@@ -16,9 +18,17 @@ has_children: true
 - Together language and framework allow to describe and execute integrated AI
   systems in the same language as their inputs.
   
+## Typical Flow of Using the AIDDL Framework
+
+1. Write one or more AIDDL files containing the required models.
+2. Write a program that:
+  - loads your AIDDL files and accesses required terms
+  - loads existing AI functions from the AIDDL framework
+  - add missing functions (e.g., application specific, glue, wrappers around
+    existing AI libraries)
+  - combine functions into an integrated AI system
+    
 # Overview
-
-
 
 ## Language
 
@@ -30,10 +40,17 @@ The language can be divided into three types of terms.
 
 ## Types
 
-Types specify subsets of the language. 
+Types specify subsets of the language.
 
-Consider the following exampl: the language contains any set mixing symbols,
-numbers, variables, etc. 
+They are used to:
+
+1. Describe models used by AI algorithms (e.g., a planning domain, machine
+   learning data or models, a logical knowledge base).
+2. Describe applications specific input/output models. This allows to write
+   application specific models without choosing an AI approach.
+
+Consider the following example: the language contains any set mixing symbols,
+numbers, variables, etc.
 
     { 1 2 3 a b c }
 
@@ -50,7 +67,7 @@ set and positive for the second.
 
 The core library makes AIDDL accessibly in a specific programming language.
 
-- Load AIDDL files (modules) into containers
+- Load AIDDL files (also called modules) into containers
 - Default operations on terms (e.g., numerical, set or list operations)
 - Evaluate terms 
 - Type check terms (given a type definition)

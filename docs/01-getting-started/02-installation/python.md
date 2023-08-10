@@ -6,17 +6,26 @@ nav_order: 2
 grand_parent: Getting Started
 ---
 
+# Installing AIDDL via PIP
+
+In a Python >= 3.7 environment, you the following command to install the Python
+core:
+
+    pip install aiddl-core
+    
+    
+# Installing from the repository (optional)
+
+
 We use `<AIDDL>` as the base of the [aiddl.org](http://www.aiddl.org) git
 repository. To install the AIDDL libraries, open a console in the root of the
 library you would like to install:
 
-1. Core library: `<AIDDL>/core/java/`
-2. Util library: `<AIDDL>/util/java/`
+1. Core library: `<AIDDL>/core/python/`
 
 And type 
 
     pip install -e .
-    
 
 # Using Conda
 
@@ -33,4 +42,4 @@ then switch to it with
     conda activate aiddl
 
 before installing the libraries above. The Python version should be at least
-3.x, but 3.7 is known to work.
+3.7.

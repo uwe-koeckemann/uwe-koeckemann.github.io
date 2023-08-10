@@ -13,21 +13,21 @@ short description and example.
 | Name               | Reference                           | Description                                                            | Examples                                        |
 |--------------------|-------------------------------------|------------------------------------------------------------------------|-------------------------------------------------|
 | Term               | `org.aiddl.term`                    | Every AIDDL expression is a term.                                      | see below                                       |
-| Symbolic           | `org.aiddl.term.symbolic`           | Non-numerical constants.                                               | `a` `e1` `+` `#integer`                         |
+| Symbolic           | `org.aiddl.term.symbolic`           | Non-numerical constants                                                | `a` `e1` `+` `#integer`                         |
 | Boolean            | `org.aiddl.term.symbolic.boolean`   | Boolean constants                                                      | `true`  `false`                                 |
 | Variable           | `org.aiddl.term.variable`           | Named variables beginning with `?` or anonymous variables `_`          | `?x` `?e1` `_`                                  |
-| String             | `org.aiddl.term.string`             | Any string of characters in quotes.                                    | `"a"` `"abc"` `"1 2 3"`                         |
-| Numerical          | `org.aiddl.term.numerical`          | Different types of numerical values.                                   | see below                                       |
-| Integer            | `org.aiddl.term.numerical.integer`  | Positive or negative integers.                                         | `0` `-3` `11`                                   |
-| Rational           | `org.aiddl.term.numerical.rational` | Positive or negative rational numbers.                                 | `0/1` `-1/3` `110/13`                           |
-| Real               | `org.aiddl.term.numerical.real`     | Positive or negative real numbers.                                     | `0.0` `-1.3` `1.1`                              |
-| Infinity           | `org.aiddl.term.numerical.inf`      | Positive or negative infinity.                                         | `INF` `+INF` `-INF`                             |
+| String             | `org.aiddl.term.string`             | Any string of characters in quotes                                     | `"a"` `"abc"` `"1 2 3"`                         |
+| Numerical          | `org.aiddl.term.numerical`          | Different types of numerical values                                    | see below                                       |
+| Integer            | `org.aiddl.term.numerical.integer`  | Positive or negative integers                                          | `0` `-3` `11`                                   |
+| Rational           | `org.aiddl.term.numerical.rational` | Positive or negative rational numbers                                  | `0/1` `-1/3` `110/13`                           |
+| Real               | `org.aiddl.term.numerical.real`     | Positive or negative real numbers                                      | `0.0` `-1.3` `1.1`                              |
+| Infinity           | `org.aiddl.term.numerical.inf`      | Positive or negative infinity                                          | `INF` `+INF` `-INF`                             |
 | NaN                | `org.aiddl.term.numerical.nan`      | Not a Number                                                           | `NaN`                                           |
-| Collection         | `org.aiddl.term.collection`         | Collections of terms.                                                  | see below                                       |
-| Set                | `org.aiddl.term.collection.set`     | A set of terms. Cannot be matched to other terms.                      | `{}` `{e1 e2 e3}` `{1 1 2}`                     |
-| List               | `org.aiddl.term.collection.list`    | A list of terms.                                                       | `[]` `[e1 e2 e3]` `[1 1 2]`                     |
+| Collection         | `org.aiddl.term.collection`         | Collections of terms                                                   | see below                                       |
+| Set                | `org.aiddl.term.collection.set`     | A set of terms. Cannot be matched to other terms                       | `{}` `{e1 e2 e3}` `{1 1 2}`                     |
+| List               | `org.aiddl.term.collection.list`    | A list of terms                                                        | `[]` `[e1 e2 e3]` `[1 1 2]`                     |
 | Tuple              | `org.aiddl.term.tuple`              | A tuple of terms. Unlike lists, we assume tuples will not be extended. | `()` `(e1 e2 e3)` `(1 1 2)`                     |
-| Reference          | `org.aiddl.term.reference`          | A reference to an entry in a specific module.                          | `e@m` references entry named `e` in module `m`  |
+| Reference          | `org.aiddl.term.reference`          | A reference to an entry in a specific module                           | `e@m` references entry named `e` in module `m`  |
 | Function Reference | `org.aiddl.term.fun-ref`            | Reference to a function. Allows using functions as data.               | `^org.aiddl.eval.add`                           |
 |                    |                                     |                                                                        | `^f@m` references function `f` in module `m`    |
 | Key Value Pair     | `org.aiddl.term.key-value`          | A key and a value term. The key must not be a Key-value pair itself.   | `x:10` symbolic key `x` with integer value `10` |
