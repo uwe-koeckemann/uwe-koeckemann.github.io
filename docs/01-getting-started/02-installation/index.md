@@ -14,7 +14,7 @@ by using their name.
 
 Add the following lines to the end of the `~/.profile` file:
 
-    AIDDL_PATH="<AIDDL-ROOT>/core/aiddl/:<AIDDL-ROOT>/util/aiddl/:<AIDDL-ROOT>/common/aiddl/"
+    AIDDL_PATH="<AIDDL-ROOT>/core/aiddl/:<AIDDL-ROOT>/common/aiddl/"
 
 # Windows
 
@@ -23,5 +23,4 @@ Add the following lines to the end of the `~/.profile` file:
 3. Change the value of AIDDL_PATH to include the following folders:
 
         <AIDDL-ROOT>/core/aiddl
-        <AIDDL-ROOT>/util/aiddl
         <AIDDL-ROOT>/common/aiddl
