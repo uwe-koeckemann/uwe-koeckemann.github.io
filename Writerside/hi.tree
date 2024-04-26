@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="hi" name="Help Instance"
+                 start-page="What-is-AIDDL.md">
+
+    <toc-element topic="What-is-AIDDL.md"/>
+    <toc-element topic="Getting-Started.md">
+        <toc-element topic="Installing-AIDDL.md">
+            <toc-element topic="Scala.md"/>
+            <toc-element topic="Python.md"/>
+            <toc-element topic="Java.md"/>
+        </toc-element>
+        <toc-element topic="Overview.md"/>
+        <toc-element topic="Writing-a-Simple-Program.md"/>
+        <toc-element topic="AIDDL-Files.md"/>
+        <toc-element topic="Using-AIDDL-Common.md"/>
+        <toc-element topic="Full-Example-Placing-Queens.md"/>
+        <toc-element topic="Going-Further-Writing-AI-Algorithms-in-AIDDL.md"/>
+        <toc-element topic="Going-Further-Creating-Types.md"/>
+        <toc-element topic="Going-Further-Examples.md"/>
+        <toc-element topic="Going-Further-contributing.md"/>
+    </toc-element>
+    <toc-element topic="The-Language.md">
+        <toc-element topic="Entries.md"/>
+        <toc-element topic="Modules.md"/>
+        <toc-element topic="Terms.md"/>
+        <toc-element topic="Namespaces.md"/>
+        <toc-element topic="Requirements.md"/>
+        <toc-element topic="Types.md"/>
+        <toc-element topic="Definitions.md"/>
+    </toc-element>
+    <toc-element topic="Core-Library.md">
+        <toc-element topic="Containers.md"/>
+        <toc-element topic="The-Evaluator.md"/>
+        <toc-element topic="Functions.md"/>
+    </toc-element>
+    <toc-element topic="Common-Library.md">
+        <toc-element topic="Deterministic-Finite-State-Machines.md"/>
+        <toc-element topic="Linear-Regression.md"/>
+    </toc-element>
+    <toc-element topic="Examples.md">
+        <toc-element topic="Learning-for-Planning.md"/>
+        <toc-element topic="Planning-For-Learning.md"/>
+        <toc-element topic="Planning-and-Goal-Reasoning.md"/>
+        <toc-element topic="Planning-with-Resources.md"/>
+        <toc-element topic="Spiderplan.md"/>
+    </toc-element>
+    <toc-element topic="External-Libraries.md">
+        <toc-element topic="Services-via-Protobuf-gRPC.md">
+            <toc-element topic="Actor-Service.md"/>
+            <toc-element topic="Sensor-Service.md"/>
+            <toc-element topic="Sender-Service.md"/>
+            <toc-element topic="Receiver-Service.md"/>
+            <toc-element topic="Function-Service.md"/>
+            <toc-element topic="Container-Service.md"/>
+        </toc-element>
+        <toc-element topic="Robot-Operating-System-ROS.md"/>
+        <toc-element topic="Coordination-ORU-Framework.md"/>
+    </toc-element>
+    <toc-element topic="Recipes.md">
+        <toc-element topic="Load-a-file-and-get-a-processed-value.md"/>
+    </toc-element>
+    <toc-element topic="About.md"/>
+</instance-profile>
