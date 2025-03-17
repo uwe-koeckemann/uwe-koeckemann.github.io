@@ -6,6 +6,7 @@ library you would like to install:
 
 1. Core library: `<AIDDL>/core/java/`
 2. Common library: `<AIDDL>/common/java/`
+3. Util library: `<AIDDL>/util/java/`
 
 For each of these (in the listed order) run the following on the command line:
 

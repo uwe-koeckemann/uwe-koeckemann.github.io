@@ -1,3 +1,0 @@
-# Going Further: Creating Types
-
-Start typing here...
