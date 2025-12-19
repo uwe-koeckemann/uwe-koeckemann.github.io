@@ -36,6 +36,7 @@
         <toc-element topic="Functions.md"/>
     </toc-element>
     <toc-element topic="Common-Library.md">
+        <toc-element topic="Acting-Sensing-Control.md"/>
         <toc-element topic="Deterministic-Finite-State-Machines.md"/>
         <toc-element topic="Linear-Regression.md"/>
     </toc-element>
